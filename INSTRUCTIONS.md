@@ -6,6 +6,7 @@ WebGPU Forward+ and Clustered Deferred Shading - Instructions
 In this project, you will implement the Forward+ and Clustered Deferred shading methods as discussed in class. You are given a scene with the Sponza atrium model and a large number of point lights, as well as a GUI to toggle between the different rendering modes.
 
 ## Contents
+
 - `src/` contains all the TypeScript and WGSL code for this project. This contains several subdirectories:
   - `renderers/` defines the different renderers in which you will implement Forward+ and Clustered Deferred shading
   - `shaders/` contains the WGSL files that are interpreted as shader programs at runtime, as well as a `shaders.ts` file which preprocesses the shaders
@@ -21,9 +22,16 @@ Follow these steps to install and view the project:
 - Run `npm dev`, which will open the project in your browser
   - The project will automatically reload when you edit any of the files
 
-Note that the project will **not** work immediately after being cloned and set up as there are some tasks for you to complete to get it up and running (see [the project instructions](#part-1-implement-the-different-rendering-methods)).
+### Notes:
 
-This project requires a WebGPU-capable browser. Ensure that you can see the Sponza scene being renderered using this [WebGPU test](https://toji.github.io/webgpu-test/). Google Chrome seems to work best on all platforms. If you have problems running the starter code, use Chrome and make sure you have updated your browser and video drivers.
+- The project will **not** work immediately after being cloned and set up as there are some tasks for you to complete to get it up and running (see [the project instructions](#part-1-implement-the-different-rendering-methods)).
+- Browsers and GPUs
+  - This project requires a WebGPU-capable browser. Ensure that you can see the Sponza scene being renderered using this [WebGPU test](https://toji.github.io/webgpu-test/).
+    - Google Chrome seems to work best on all platforms.
+    - Try [Google Chrome Canary](https://www.google.com/chrome/canary/) for the latest updates.
+  - If you have problems running the starter code, use Chrome and make sure you have updated your browser and video drivers.
+  - Remember to follow steps from [Project 0](https://github.com/CIS5650-Fall-2024/Project0-Getting-Started/blob/main/INSTRUCTION.md#part-23-project-instructions---webgpu) if needed.
+- Ensure that the `Adapter Info -> Description` on https://webgpureport.org/, is your main GPU. Often your low-powered GPU will be selected as default. To make a permanent switch, use your OS's GPU Settings to make the GPU default for your browser.
 
 ### GitHub Pages setup
 
@@ -35,6 +43,7 @@ Since this project uses WebGPU, it is easy to deploy it on the web for anyone to
 Once you've done that, any new commit to the `main` branch should automatically deploy to the URL `<username>.github.io/<repo_name>`.
 
 ## Requirements
+
 **Ask on Ed Discussion for any clarifications.**
 
 In this project, you are given code for:
