@@ -1,12 +1,15 @@
 // TODO-2: implement the Forward+ fragment shader
 
-// See naive.fs.wgsl for basic setup, change the light contribution using light clusters (SEE common.wgsl for calculateLightContrib function and set up Light clusters there for multiple uses across the shaders)
+// See naive.fs.wgsl for basic fragment shader setup; this shader should use light clusters instead of looping over all lights
 
+// ------------------------------------
+// Shading process:
+// ------------------------------------
+// Determine which cluster contains the current fragment.
 // Retrieve the number of lights that affect the current fragment from the cluster’s data.
 // Initialize a variable to accumulate the total light contribution for the fragment.
-// Iterate through the lights in the cluster:
-//     For each light, get its index from the cluster's list of influencing lights.
-//     Access the light's properties using the index from the light set.
+// For each light in the cluster:
+//     Access the light's properties using its index.
 //     Calculate the contribution of the light based on its position, the fragment’s position, and the surface normal.
 //     Add the calculated contribution to the total light accumulation.
 // Multiply the fragment’s diffuse color by the accumulated light contribution.

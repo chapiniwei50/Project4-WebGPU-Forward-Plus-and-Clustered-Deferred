@@ -1,3 +1,3 @@
 // TODO-3: implement the Clustered Deferred fullscreen fragment shader
 
-// Similar to forward_plus rendering pipeline for light clustering, read in information from G-buffers
+// Similar to the Forward+ fragment shader, but with vertex information coming from the G-buffer instead.

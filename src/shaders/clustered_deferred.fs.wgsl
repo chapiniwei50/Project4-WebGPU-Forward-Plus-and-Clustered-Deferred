@@ -1,3 +1,3 @@
 // TODO-3: implement the Clustered Deferred G-buffer fragment shader
 
-// Store G-buffer information. 
+// This shader should only store G-buffer information and should not do any shading.
