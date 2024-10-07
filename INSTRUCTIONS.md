@@ -40,7 +40,9 @@ Since this project uses WebGPU, it is easy to deploy it on the web for anyone to
 - Go to the "Pages" tab
 - Under "Build and Deployment", set "Source" to "GitHub Actions"
 
-Once you've done that, any new commit to the `main` branch should automatically deploy to the URL `<username>.github.io/<repo_name>`.
+You will also need to go to the "Actions" tab in your repository and enable workflows there.
+
+Once you've done those steps, any new commit to the `main` branch should automatically deploy to the URL `<username>.github.io/<repo_name>`.
 
 ## Requirements
 
