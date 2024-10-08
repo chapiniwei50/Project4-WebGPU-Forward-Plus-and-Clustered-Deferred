@@ -19,7 +19,7 @@ Follow these steps to install and view the project:
 - Clone this repository
 - Download and install [Node.js](https://nodejs.org/en/)
 - Run `npm install` in the root directory of this project to download and install dependencies
-- Run `npm dev`, which will open the project in your browser
+- Run `npm run dev`, which will open the project in your browser
   - The project will automatically reload when you edit any of the files
 
 ### Notes:
