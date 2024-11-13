@@ -40,7 +40,7 @@ Follow these steps to install and view the project:
   - Once you have installed the extension in Chrome, access the WebGPU panel by navigating to: **Developer Tools -> More Tools -> WebGPU**.
   - Please note that the extension is currently in an unstable state. If the reset button doesn't function as expected, try reopening the tab to refresh the panel.
 
-### GitHub Pages setup
+### GitHub Pages setup (5 points)
 
 Since this project uses WebGPU, it is easy to deploy it on the web for anyone to see. To set this up, do the following:
 - Go to your repository's settings
@@ -71,7 +71,7 @@ WebGPU errors will appear in your browser's developer console (Ctrl + Shift + J 
 
 To start off, the naive renderer is missing a camera view projection matrix buffer, and your job is to fill in the missing parts. This will expose you to various parts of the codebase and will hopefully help you understand the general layout of the WebGPU rendering pipeline.
 
-#### 1) Naive (+35)
+#### 1) Naive (20 points)
 
 1.1) Create and write to the buffer
 - You first need to create the buffer in `camera.ts` and write the view projection matrix to it
@@ -88,7 +88,7 @@ To start off, the naive renderer is missing a camera view projection matrix buff
 
 Then, based on the discussions in lecture and recitation, you are expected to implement the Forward+ and Clustered Deferred rendering methods and analyze their results. Here is a summary of both methods:
 
-#### 2) Forward+ (+50)
+#### 2) Forward+ (50 points)
 
   - Build a data structure to keep track of how many lights are in each cluster and what their indices are
   - Render each fragment using only the lights that overlap its cluster
@@ -96,7 +96,7 @@ Then, based on the discussions in lecture and recitation, you are expected to im
 
 When adding new buffers, especially if they contain new structs, their alignment might be different than what you expect. Be sure to check your structs' alignment using [this online calculator](https://webgpufundamentals.org/webgpu/lessons/resources/wgsl-offset-computer.html#) and match the memory layout on the host.
 
-#### 3) Clustered Deferred (+15)
+#### 3) Clustered Deferred (15 points)
 
   - Reuse the clustering logic from Forward+
   - Store vertex attributes in a G-buffer
@@ -107,7 +107,7 @@ When adding new buffers, especially if they contain new structs, their alignment
 
 For full credit, you must show a good optimization effort and record the performance of each version you test.
 
-#### Extra Credit: Post Processing (+5)
+#### Extra Credit: Post Processing (5 points)
 
 Implement one of the following post-processing effects:
 - Bloom using post-process blur (box or Gaussian)
@@ -115,7 +115,7 @@ Implement one of the following post-processing effects:
 
 For full credit, you must create a new compute pass (not a fullscreen rendering pass) for post-processing.
 
-#### Extra Credit: G-buffer Optimization (+10)
+#### Extra Credit: G-buffer Optimization (10 points)
 
 Use a single compute pass to replace the vertex + fragment shader fullscreen rendering pass you are provided in the base code. (+5)
 
@@ -132,7 +132,7 @@ Here are some ideas to get you started:
 - Reduce the number of properties passed via the G-buffer
   - For example, instead of storing world position in a texture, reconstruct it using camera matrices and depth
 
-#### Extra Credit: Visibility Buffer (+15)
+#### Extra Credit: Visibility Buffer (15 points)
 
 For devices with limited GPU bandwidth, we can try to further reduce the memory footprint of the geometry pass. This can be done by using a single channel `u32` buffer for shading. Here are some hints to do that:
 
@@ -149,11 +149,11 @@ For more reference, please refer to the following materials:
 - [The Visibility Buffer: A Cache-Friendly Approach to Deferred Shading (JCGT)](https://jcgt.org/published/0002/02/04/)
 - [Visibility Buffer Rendering with Material Graphs – Filmic Worlds](http://filmicworlds.com/blog/visibility-buffer-rendering-with-material-graphs/)
 
-#### Extra Credit: Render Bundles (+5)
+#### Extra Credit: Render Bundles (5 points)
 
 Use [render bundles](https://toji.dev/webgpu-best-practices/render-bundles.html) to reduce the overhead of host-side draw calls. Make sure you provide a performance analysis showing the effect of this change.
 
-## Performance Analysis
+## Performance Analysis (10 points)
 
 Compare your implementations of Forward+ and Clustered Deferred shading and analyze their differences.
 - Is one of them faster?
