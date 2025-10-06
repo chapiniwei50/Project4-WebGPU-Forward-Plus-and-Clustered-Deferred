@@ -36,9 +36,9 @@ Follow these steps to install and view the project:
 ### Debugging Tools
 
 - You can use the standard console debugger in the browser’s developer tools to inspect and debug your code.
-- Additionally, you can utilize the [Chrome WebGPU Developer Tools extension](https://chromewebstore.google.com/detail/webgpu-devtools/ckabpgjkjmbkfmichbbgcgbelkbbpopi) to capture frames and inspect detailed GPU-related information.
-  - Once you have installed the extension in Chrome, access the WebGPU panel by navigating to: **Developer Tools -> More Tools -> WebGPU**.
-  - Please note that the extension is currently in an unstable state. If the reset button doesn't function as expected, try reopening the tab to refresh the panel.
+- Additionally, you can utilize the [WebGPU Inspector extension](https://github.com/brendan-duncan/webgpu_inspector?tab=readme-ov-file) to capture frames and inspect detailed GPU-related information. The tool is designed and implemented by Brendan Duncan.
+  - Once you have installed the extension in Chrome, **Select More Tools / Developer Tools, or press F12 or Shit+CTRL+J (Option + ⌘ + J on MacOS)**. You can also right-click on the page and select Inspect. When the WebGPU Inspector extension is enabled in the extension manager, there will be a WebGPU Inspector tab.
+  - If you have more question about this tool you can try to check the readme of the repo first.
 
 ### GitHub Pages setup (5 points)
 
