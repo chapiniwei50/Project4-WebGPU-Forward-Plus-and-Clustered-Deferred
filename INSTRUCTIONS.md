@@ -1,7 +1,7 @@
 WebGPU Forward+ and Clustered Deferred Shading - Instructions
 ==========================================================
 
-**This is due Friday, October 18th at 11:59 PM.**
+**This is due Friday, October 17th at 11:59 PM.**
 
 In this project, you will implement the Forward+ and Clustered Deferred shading methods as discussed in class. You are given a scene with the Sponza atrium model and a large number of point lights, as well as a GUI to toggle between the different rendering modes.
 
