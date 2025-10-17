@@ -32,7 +32,6 @@ This project implements and compares three modern real-time rendering techniques
 
 ## Demo Video/GIF
 
-[![WebGPU Rendering Demo - 30+ Second Overview](img/demo.gif)](img/demo.gif)
 
 *demo showing all three renderers, dynamic light movement, and real-time performance characteristics (500 - 1000 lights)*
 
