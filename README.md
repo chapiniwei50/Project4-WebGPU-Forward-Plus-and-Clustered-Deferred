@@ -38,11 +38,13 @@ This project implements and compares three modern real-time rendering techniques
 ### Individual Renderer Performance (2000 Lights)
 
 
+
 | Renderer | Demo | Performance |
 |----------|------|-------------|
-| **Naive 🐌** | [![](img/naive_2000.gif)](img/naive_2000.gif) | ~650ms (1.5 FPS) |
-| **Forward+ ⚡** | [![](img/forward+2000.gif)](img/forward+2000.gif) | ~298ms (3.4 FPS) |
-| **Clustered Deferred 🧊** | [![](img/clustered_deferred2000.gif)](img/clustered_deferred2000.gif) | ~86ms (11.6 FPS) |
+| **Naive 🐌** | [<img src="img/naive_2000.gif" width="300" height="225">](img/naive_2000.gif) | ~650ms (1.5 FPS) |
+| **Forward+ ⚡** | [<img src="img/forward+2000.gif" width="300" height="225">](img/forward+2000.gif) | ~298ms (3.4 FPS) |
+| **Clustered Deferred 🧊** | [<img src="img/clustered_deferred2000.gif" width="300" height="225">](img/clustered_deferred2000.gif) | ~86ms (11.6 FPS) |
+
 
 
 ## Performance Analysis
