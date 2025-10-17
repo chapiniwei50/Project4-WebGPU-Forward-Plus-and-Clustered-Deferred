@@ -1,7 +1,6 @@
-import * as renderer from '../renderer';
+﻿import * as renderer from '../renderer';
 import * as shaders from '../shaders/shaders';
 import { Stage } from '../stage/stage';
-
 export class NaiveRenderer extends renderer.Renderer {
     sceneUniformsBindGroupLayout: GPUBindGroupLayout;
     sceneUniformsBindGroup: GPUBindGroup;
@@ -11,13 +10,25 @@ export class NaiveRenderer extends renderer.Renderer {
 
     pipeline: GPURenderPipeline;
 
+    private frameTimes: number[] = [];
+    private lastFrameTime = 0;
+    private sampleCount = 0;
+    private totalFrameTime = 0;
+    private minFrameTime = Infinity;
+    private maxFrameTime = 0;
+    private readonly MAX_SAMPLES = 60;
+
     constructor(stage: Stage) {
         super(stage);
 
         this.sceneUniformsBindGroupLayout = renderer.device.createBindGroupLayout({
             label: "scene uniforms bind group layout",
             entries: [
-                // TODO-1.2: add an entry for camera uniforms at binding 0, visible to only the vertex shader, and of type "uniform"
+                {
+                    binding: 0,
+                    visibility: GPUShaderStage.VERTEX,
+                    buffer: { type: "uniform" }
+                },
                 { // lightSet
                     binding: 1,
                     visibility: GPUShaderStage.FRAGMENT,
@@ -30,9 +41,10 @@ export class NaiveRenderer extends renderer.Renderer {
             label: "scene uniforms bind group",
             layout: this.sceneUniformsBindGroupLayout,
             entries: [
-                // TODO-1.2: add an entry for camera uniforms at binding 0
-                // you can access the camera using `this.camera`
-                // if you run into TypeScript errors, you're probably trying to upload the host buffer instead
+                {
+                    binding: 0,
+                    resource: { buffer: this.camera.uniformsBuffer }
+                },
                 {
                     binding: 1,
                     resource: { buffer: this.lights.lightSetStorageBuffer }
@@ -66,7 +78,7 @@ export class NaiveRenderer extends renderer.Renderer {
                     label: "naive vert shader",
                     code: shaders.naiveVertSrc
                 }),
-                buffers: [ renderer.vertexBufferLayout ]
+                buffers: [renderer.vertexBufferLayout]
             },
             fragment: {
                 module: renderer.device.createShaderModule({
@@ -80,6 +92,17 @@ export class NaiveRenderer extends renderer.Renderer {
                 ]
             }
         });
+    }
+
+    override onFrame(deltaTime: number) {
+        const currentTime = performance.now();
+        if (this.lastFrameTime > 0) {
+            const frameTime = currentTime - this.lastFrameTime;
+            this.measurePerformance(frameTime);
+        }
+        this.lastFrameTime = currentTime;
+
+        super.onFrame(deltaTime);
     }
 
     override draw() {
@@ -105,7 +128,7 @@ export class NaiveRenderer extends renderer.Renderer {
         });
         renderPass.setPipeline(this.pipeline);
 
-        // TODO-1.2: bind `this.sceneUniformsBindGroup` to index `shaders.constants.bindGroup_scene`
+        renderPass.setBindGroup(shaders.constants.bindGroup_scene, this.sceneUniformsBindGroup);
 
         this.scene.iterate(node => {
             renderPass.setBindGroup(shaders.constants.bindGroup_model, node.modelBindGroup);
@@ -120,5 +143,45 @@ export class NaiveRenderer extends renderer.Renderer {
         renderPass.end();
 
         renderer.device.queue.submit([encoder.finish()]);
+    }
+
+    private measurePerformance(frameTime: number) {
+        this.frameTimes.push(frameTime);
+        this.totalFrameTime += frameTime;
+        this.sampleCount++;
+
+        this.minFrameTime = Math.min(this.minFrameTime, frameTime);
+        this.maxFrameTime = Math.max(this.maxFrameTime, frameTime);
+
+        if (this.sampleCount >= this.MAX_SAMPLES) {
+            const avgFrameTime = this.totalFrameTime / this.sampleCount;
+            const fps = 1000 / avgFrameTime;
+
+            let lightCount = 'unknown';
+            try {
+                if (this.lights && this.lights.getLightCount) {
+                    lightCount = this.lights.getLightCount();
+                } else if (this.stage && this.stage.lights && this.stage.lights.getLightCount) {
+                    lightCount = this.stage.lights.getLightCount();
+                }
+            } catch (e) {
+                lightCount = 'error';
+            }
+
+            console.log(`🐌 Naive - Lights: ${lightCount} | ` +
+                `Avg: ${avgFrameTime.toFixed(2)}ms (${fps.toFixed(1)} FPS) | ` +
+                `Min: ${this.minFrameTime.toFixed(2)}ms | ` +
+                `Max: ${this.maxFrameTime.toFixed(2)}ms`);
+
+            this.frameTimes = [];
+            this.totalFrameTime = 0;
+            this.sampleCount = 0;
+            this.minFrameTime = Infinity;
+            this.maxFrameTime = 0;
+        }
+    }
+
+    destroy() {
+        this.depthTexture.destroy();
     }
 }
