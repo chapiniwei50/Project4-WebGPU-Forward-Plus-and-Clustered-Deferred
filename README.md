@@ -30,7 +30,8 @@ This project implements and compares three modern real-time rendering techniques
 
 *Click the image above to view the live WebGPU rendering demo*
 
-## Demo Video/GIF
+## Demo Video
+[▶️ **Go to Demo Video**](https://youtube.com/watch?v=cgHpqnpGqHpqnpG0Qo&feature=youtu.be)
 
 
 *demo showing all three renderers, dynamic light movement, and real-time performance characteristics (500 - 1000 lights)*
